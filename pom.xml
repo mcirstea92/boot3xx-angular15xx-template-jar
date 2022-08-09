@@ -24,6 +24,7 @@
 
     <modules>
         <module>event-tracker-backend</module>
+        <module>event-tracker-frontend</module>
     </modules>
 
     <build>
