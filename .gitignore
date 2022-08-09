@@ -1,0 +1,6 @@
+/event-tracker-backend/logs/
+/logs
+/.idea
+
+*.iml
+/.idea/
