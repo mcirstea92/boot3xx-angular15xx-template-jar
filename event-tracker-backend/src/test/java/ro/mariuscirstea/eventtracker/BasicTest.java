@@ -1,6 +1,6 @@
 package ro.mariuscirstea.eventtracker;
 
-
+import io.jsonwebtoken.lang.Assert;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,8 +35,8 @@ public class BasicTest {
     private PasswordEncoder passwordEncoder;
 
     @Test
-    public void test() {
-        passwordEncoder.encode("test");
+    public void testSuccessfullyAutowire() {
+        Assert.notNull(passwordEncoder, "Bean should be auto-wired successfully!");
     }
 
 }

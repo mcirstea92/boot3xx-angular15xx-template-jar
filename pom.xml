@@ -34,9 +34,9 @@
                     <artifactId>flyway-maven-plugin</artifactId>
                     <version>${flyway.version}</version>
                     <configuration>
-                        <url>jdbc:mysql://localhost:3306/eventtracker</url>
-                        <user>marius</user>
-                        <password>OP3L45TR4</password>
+                        <url>jdbc:mysql://localhost:3306/realDb</url>
+                        <user>realUser</user>
+                        <password>realPass</password>
                         <locations>
                             <location>classpath:db/migration</location>
                         </locations>
