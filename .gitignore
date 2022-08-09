@@ -4,3 +4,5 @@
 
 *.iml
 /.idea/
+/event-tracker-backend/target
+/event-tracker-frontend/node_modules
