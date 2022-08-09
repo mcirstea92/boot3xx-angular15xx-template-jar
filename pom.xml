@@ -35,9 +35,9 @@
                     <artifactId>flyway-maven-plugin</artifactId>
                     <version>${flyway.version}</version>
                     <configuration>
-                        <url>jdbc:mysql://localhost:3306/eventtracker</url>
-                        <user>marius</user>
-                        <password>OP3L45TR4</password>
+                        <url>jdbc:mysql://localhost:3306/yourDb</url>
+                        <user>yourUser</user>
+                        <password>yourPass</password>
                         <locations>
                             <location>classpath:db/migration</location>
                         </locations>
@@ -118,25 +118,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>3.3.0</version>
-                    <!--<executions>
-                        <execution>
-                            <id>copy-resources-maven</id>
-                            <phase>test</phase>
-                            <goals>
-                                <goal>copy-resources</goal>
-                            </goals>
-                            <configuration>
-                                <outputDirectory>${project.build.directory}/classes/static</outputDirectory>
-                                <resources>
-                                    <resource>
-                                        <directory>
-                                            ${project.build.directory}/../../event-tracker-frontend/dist/angular-skeleton
-                                        </directory>
-                                    </resource>
-                                </resources>
-                            </configuration>
-                        </execution>
-                    </executions>-->
                 </plugin>
             </plugins>
         </pluginManagement>

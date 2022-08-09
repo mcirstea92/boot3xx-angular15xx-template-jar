@@ -1,7 +1,7 @@
 package ro.mariuscirstea.eventtracker;
 
-import io.jsonwebtoken.lang.Assert;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class BasicTest {
 
     @Test
     public void testSuccessfullyAutowire() {
-        Assert.notNull(passwordEncoder, "Bean should be auto-wired successfully!");
+        Assert.assertNotNull("Bean should be auto-wired successfully!", passwordEncoder);
     }
 
 }
