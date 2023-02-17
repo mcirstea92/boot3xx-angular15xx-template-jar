@@ -1,0 +1,73 @@
+<div class="card-body" *ngIf="loading">
+  <app-loading-progress [loading]="loading"
+                        loadingText="{{'loading_events'|transloco}}"></app-loading-progress>
+</div>
+
+<custom-header [text]="headerTextValue" [shiftLeft]="true"></custom-header>
+
+<div class="card-body" *ngIf="!loading">
+
+  <div fxLayout="row" class="sticky-filter">
+    <input fxFlex="100" matInput class="text-center radius-0 form-control flex-column border p-2"
+           placeholder="&#9203; {{'filter_events'|transloco}}" (keyup)="filterSearch($event)"/>
+  </div>
+
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-100-width push-bottom-mini" matSort
+             (matSortChange)="sortData($event)">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell class="max-w-55 px-2" *matHeaderCellDef mat-sort-header="id"> #</mat-header-cell>
+      <mat-cell class="max-w-55 pointer px-2" *matCellDef="let element"
+                (click)="getEventById(element.id)"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Description</mat-header-cell>
+      <mat-cell title="{{element.type}} - {{element.description}}"
+                *matCellDef="let element"> {{element.description}} </mat-cell>
+    </ng-container>
+
+    <!-- Created Column -->
+    <ng-container matColumnDef="created">
+      <mat-header-cell *matHeaderCellDef mat-sort-header="created"> Created</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div
+          title="{{element.created}}">{{element.created | localizedDate: 'dd-MMM-yy HH:mm:ss' }}</div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Additional Info Column -->
+    <ng-container matColumnDef="additionalInfo">
+      <mat-header-cell *matHeaderCellDef> Additional Info</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div
+          title="UserId: {{element.userId}}; IP: {{element.ip}} {{element.additionalInfo}}">{{element.additionalInfo | readMore:30:showAll}}</div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef mat-sort-header="type"> Type</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="user">
+      <mat-header-cell *matHeaderCellDef> User</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.userId}} </mat-cell>
+    </ng-container>
+
+    <!-- IP Column -->
+    <ng-container matColumnDef="ip">
+      <mat-header-cell *matHeaderCellDef> IP</mat-header-cell>
+      <mat-cell *matCellDef="let element" title="{{retrieveIpDetails(element.ip)}}"> {{element.ip}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="push-top"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple
+             [ngClass]="row.id % 2 == 0 ? 'mat-row-even': 'mat-row-odd'"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[4, 8, 12, 16, 20, 50]" [pageSize]="12" showFirstLastButtons
+                 class="sticky-paginator"></mat-paginator>
+</div>

@@ -1,0 +1,24 @@
+@media (max-width: 991px) {
+
+  .mat-column-id {
+    flex: 0 0 10%;
+  }
+
+  .mat-column-key {
+    flex: 0 0 90%;
+  }
+
+  .mat-column-value {
+    flex: 0 0 0;
+  }
+}
+
+@media (min-width: 991px) {
+  .mat-column-id {
+    flex: 0 0 10%;
+  }
+
+  .mat-column-key {
+    flex: 0 0 30%;
+  }
+}

@@ -1,0 +1,101 @@
+<div>
+  <nav class="navbar navbar-expand-lg navbar-dark px-lg-2 py-0 bg-primary sticky-top collapsed">
+    <a class="navbar-brand" [routerLink]="'/'" (click)="isMenuCollapsed = true">
+      <i class="fas fa-home mx-1"></i>
+      <span>Template</span>
+    </a>
+
+    <button class="navbar-toggler btn-sm" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+      &#9776;
+    </button>
+
+    <!-- Step 2: Add the ngbCollapse directive to the element below. -->
+    <div [ngbCollapse]="isMenuCollapsed" class="navbar-collapse collapse">
+      <ul class="navbar-nav me-auto" *ngIf="token.loggedIn.value">
+        <li class="nav-item" *ngIf="token.loggedInUserIsAdmin()">
+          <a class="nav-link" [routerLink]="'/events'" (click)="isMenuCollapsed = true">
+            <i class="far fa-calendar-alt green"></i>
+            {{'events' | transloco}}
+          </a>
+        </li>
+      </ul>
+      <div class="flex-fill"></div>
+      <ul class="navbar-nav bottom-3">
+        <li class="nav-item dropdown" *ngIf="!!token.loggedIn.value">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <mat-icon class="top-7">person</mat-icon>
+            {{token.getUsername()}}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <li class="min-w-200">
+              <div class="font-monospace text-start row ps-2">
+                <hr-separator label="{{'user_details' | transloco}}"></hr-separator>
+                <div class="col-11 m-2" title="{{'complete_user_details' | transloco}}">
+                  <i class="fas fa-signature blue"></i>
+                  {{token.getName()}}
+                </div>
+                <div class="col-11 m-2" *ngFor="let item of token.getAuthorities()"
+                     title="{{'user_roles' | transloco}}">
+                  <i class="far fa-check-circle"></i>
+                  {{item}}
+                </div>
+                <div>
+                  <hr-separator label="{{'logs' | transloco}}"></hr-separator>
+                  <div class="col-11 m-2" title="{{'show_logs' | transloco}}"
+                       (click)="consoleService.showLogs();isMenuCollapsed = true">
+                    <i class="fa-solid fa-align-right"></i>
+                    <span>{{'show_logs' | transloco}}</span>
+                  </div>
+                  <hr-separator label="{{'settings' | transloco}}"></hr-separator>
+                  <div class="col-11 m-2" title="{{'check_properties' | transloco}}" [routerLink]="'/properties'"
+                       (click)="isMenuCollapsed = true">
+                    <i class="fa-regular fa-circle-dot"></i>
+                    <span>{{'check_properties' | transloco}}</span>
+                  </div>
+                </div>
+              </div>
+              <button data-bs-toggle="dropdown" (click)="logout()" title="{{'sign_out' | transloco}}"
+                      class="float-end me-2 ms-2 mt-2" mat-raised-button color="warn">
+                <i class="fas fa-sign-out-alt me-1"></i>
+                <span>{{'sign_out' | transloco}}</span>
+              </button>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" *ngIf="!token.loggedIn.value">
+          <a class="nav-link dropdown-toggle float-md-end" role="button" data-bs-toggle="dropdown"
+             aria-expanded="false" title="{{'login' | transloco}}">
+            <mat-icon class="top-7">person_outline</mat-icon>
+            <span class="ms-1">{{'login' | transloco}}</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end py-1 px-2 mt-lg-2" aria-labelledby="navbarDropdown">
+            <li>
+              <hr-separator label="{{'user_authentication' | transloco}}"></hr-separator>
+            </li>
+            <li class="min-w-200">
+              <div class="col-11 m-2" title="{{'sign_in' | transloco}}" [routerLink]="'/login'"
+                   (click)="isMenuCollapsed = true">
+                <mat-icon>login</mat-icon>
+                <span class="ms-2 bottom-7">{{'sign_in' | transloco}}</span>
+              </div>
+            </li>
+            <li class="min-w-200">
+              <div class="col-11 m-2" title="{{'register_account' | transloco}}" [routerLink]="'/signup'"
+                   (click)="isMenuCollapsed = true">
+                <mat-icon>person_add</mat-icon>
+                <span class="ps-2 bottom-7">{{'register' | transloco}}</span>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="card-body full-height body-margin-bottom">
+    <router-outlet></router-outlet>
+  </div>
+  <custom-footer
+    text="<strong>{{time | localizedDate:'dd MMM yy - HH:mm:ss'}}</strong>"></custom-footer>
+
+</div>

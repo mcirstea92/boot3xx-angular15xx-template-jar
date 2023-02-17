@@ -1,0 +1,15 @@
+<div mat-dialog-title [ngClass]="data.titleClasses" cdkFocusInitial>
+  <h2 [innerHTML]="data.title"></h2>
+</div>
+<mat-dialog-content class="mat-typography">
+  <h3 *ngIf="data.subtitle">{{data.subtitle}}</h3>
+  <span>{{data.body}}</span>
+  <div [innerHTML]="dialogBodyContainer"></div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button *ngIf="data.saveAction" mat-button [ngClass]="data.saveBtnClasses"
+          (click)="saveAction()">{{data.saveText}}</button>
+  <button *ngIf="data.saveNoDismiss" mat-button [ngClass]="data.saveBtnClasses"
+          (click)="saveNoDismiss()">{{data.saveText}}</button>
+  <button mat-button [ngClass]="data.closeBtnClasses" (click)="close()">{{data.closeText}}</button>
+</mat-dialog-actions>

@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Confirmare acțiune</h1>
+<h2 mat-dialog-content>{{confirmMessage}}</h2>
+<div mat-dialog-actions class="float-end me-2">
+  <button mat-stroked-button color="accent" (click)="dialogRef.close(true)">Confirm</button>
+  <button cdkFocusInitial mat-stroked-button color="warn" (click)="dialogRef.close(false)">Cancel</button>
+</div>

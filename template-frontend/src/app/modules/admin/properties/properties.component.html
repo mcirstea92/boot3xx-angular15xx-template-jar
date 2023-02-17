@@ -1,0 +1,56 @@
+<div>
+  <div class="card-body" *ngIf="loading">
+    <app-loading-progress [loading]="loading"
+                          loadingText="Loading properties readings, please wait..."></app-loading-progress>
+  </div>
+
+  <div class="card-body py-0" *ngIf="!loading">
+    <h1>Backend controlled properties</h1>
+  </div>
+
+  <div class="card-body py-0 sticky-filter" *ngIf="!loading">
+    <input matInput class="float-end form-control flex-column border ps-1 fa" placeholder="&#9203; Filter properties"
+           (keyup)="filterSearch($event)"/>
+  </div>
+
+  <div class="card-body" *ngIf="!loading">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort (matSortChange)="sortData($event)">
+      <!-- Id Column -->
+      <ng-container matColumnDef="id" class="">
+        <mat-header-cell class="max-w-55 px-2" *matHeaderCellDef mat-sort-header="id"> #</mat-header-cell>
+        <mat-cell class="max-w-55 px-2 pointer" *matCellDef="let element; let i=index"
+                  (click)="loadProperty(element)"> {{i + 1}}</mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="key">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="key"> Key</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div class="multiline" title="{{element.key}}">
+            {{element.key}}
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Value Column -->
+      <ng-container matColumnDef="value">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="value"> Value</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div class="multiline">
+            {{element.value}}
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="push-top"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns; let i=index;" matRipple
+               [ngClass]="(i+1) % 2 == 0 ? 'mat-row-even': 'mat-row-odd'"></mat-row>
+      <tr class="mat-row d-flex" *matNoDataRow>
+        <td class="mat-cell table-100-width text-center line-height-50px">No data matching the filter</td>
+      </tr>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[20, 50]" [pageSize]="50" showFirstLastButtons
+                   class="sticky-paginator"></mat-paginator>
+  </div>
+
+</div>
