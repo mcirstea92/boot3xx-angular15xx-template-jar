@@ -1,6 +1,6 @@
 # Spring Boot & Angular template app
 
-This application is a skeleton app, based on SpringBoot 2.7.8 and Angular 15.1.1 at the time **[17th of Feb 23]**
+This application is a skeleton app, based on SpringBoot 3.0.2 and Angular 15.1.1 at the time **[17th of Feb 23]**
 
 It contains the minimum Spring Security configurations in order to log in with a default admin user and the ability to
 secure URLs with OAuth2 JWT tokens.
