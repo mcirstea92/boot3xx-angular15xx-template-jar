@@ -1,0 +1,28 @@
+.mat-column-id {
+  width: 36px !important;
+  padding-right: 4px;
+}
+
+.mat-column-description {
+  padding-left: 4px;
+}
+
+.mat-column-type {
+  padding-left: 4px;
+}
+
+.mat-column-created {
+  padding-left: 4px;
+}
+
+.mat-column-additionalInfo {
+  padding-left: 4px;
+}
+
+.mat-column-user {
+  padding-left: 4px;
+}
+
+.mat-column-ip {
+  padding-left: 4px;
+}

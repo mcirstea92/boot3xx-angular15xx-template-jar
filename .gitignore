@@ -1,8 +1,8 @@
-/event-tracker-backend/logs/
+/template-backend/logs/
 /logs
 /.idea
 
 *.iml
 /.idea/
-/event-tracker-backend/target
-/event-tracker-frontend/node_modules
+/template-backend/target
+/template-frontend/node_modules

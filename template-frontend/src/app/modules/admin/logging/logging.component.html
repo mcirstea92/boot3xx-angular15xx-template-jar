@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-header">Logging</div>
+  <div class="card-body">
+    <div title="Set logging level for a given package. Eg: ro.mariuscirstea.niklas.service">
+      <i class="fas fa-align-justify"></i>
+      <mat-form-field appearance="fill">
+        <mat-label>Set log level for package</mat-label>
+        <input matInput placeholder="ro.mariuscirstea.niklas.service" [(ngModel)]="loggerPackageName">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Level for package</mat-label>
+        <mat-select [(ngModel)]="loggerPackageLevel">
+          <mat-option value="DEBUG">Debug</mat-option>
+          <mat-option value="INFO">Info</mat-option>
+          <mat-option value="WARN">Warn</mat-option>
+          <mat-option value="ERROR">Error</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button class="btn-primary btn-sm" (click)="applyPackageLogLevel()">Apply</button>
+    </div>
+    <div title="Set logging for root level">
+      <i class="fas fa-align-justify"></i>
+      Set root log level
+      <mat-form-field appearance="standard">
+        <mat-label>Level for package</mat-label>
+        <mat-select [(ngModel)]="rootLoggerLevel">
+          <mat-option value="DEBUG">Debug</mat-option>
+          <mat-option value="INFO">Info</mat-option>
+          <mat-option value="WARN">Warn</mat-option>
+          <mat-option value="ERROR">Error</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button class="btn-primary btn-sm" (click)="applyRootLogLevel()">Apply</button>
+    </div>
+    <div title="Set logging for root level">
+      <i class="fas fa-align-justify"></i>
+      <mat-form-field appearance="fill">
+        <mat-label>Read last X lines from log file</mat-label>
+        <input matInput placeholder="10" [(ngModel)]="lastRowNo">
+      </mat-form-field>
+      <button class="btn-primary btn-sm" (click)="readLastXRowsFromLogFile()">Read</button>
+    </div>
+  </div>
+</div>

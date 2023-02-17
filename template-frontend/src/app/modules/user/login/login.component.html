@@ -1,0 +1,46 @@
+<div *ngIf="isLoggedIn; else loggedOut">
+  <app-home-page></app-home-page>
+</div>
+
+<div class="card-body" *ngIf="loading">
+  <app-loading-progress [loading]="loading"
+                        loadingText="Signing in, please wait..."></app-loading-progress>
+</div>
+
+<ng-template #loggedOut>
+  <div class="flex-row d-flex mt-2 h-100">
+    <div class="text-center col-lg-4 col-md-6 col-sm-8 col-10 mx-auto h-100">
+      <form name="form" (ngSubmit)="f.form.valid && onSubmitLogin()" #f="ngForm" novalidate class="row">
+        <mat-form-field class="col-12" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" name="email" [(ngModel)]="form.username" #username="ngModel" required/>
+          <mat-error *ngIf="f.submitted && username.invalid">
+            <div *ngIf="username.errors.required">Email is required</div>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-12" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" name="password" [(ngModel)]="form.password" #password="ngModel" required/>
+          <mat-error *ngIf="f.submitted && password.invalid">
+            <div *ngIf="password.errors.required">Password is required</div>
+          </mat-error>
+        </mat-form-field>
+        <div class="col-12 mt-2">
+          <mat-error *ngIf="f.submitted && isLoginFailed" class="mb-2 font-size-16">
+            <span>Login failed: <strong>{{errorMessage}}</strong></span>
+          </mat-error>
+          <button class="w-75" mat-stroked-button color="primary">
+            <i class="fas fa-sign-in-alt bg-gradient"></i>
+            Login
+          </button>
+        </div>
+      </form>
+      <hr/>
+      <p>Don't have an account?</p>
+      <button class="w-75" [routerLink]="'/signup'" mat-stroked-button color="accent">
+        <i class="fas fa-user-plus bg-gradient"></i>
+        Create account
+      </button>
+    </div>
+  </div>
+</ng-template>

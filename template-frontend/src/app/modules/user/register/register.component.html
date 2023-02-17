@@ -1,0 +1,89 @@
+<div class="card-body" *ngIf="loading">
+  <app-loading-progress [loading]="loading"
+                        loadingText="Signing up, please wait..."></app-loading-progress>
+</div>
+
+<div class="flex-row d-flex mt-2 h-100">
+  <div class="text-center col-lg-4 col-md-6 col-sm-8 col-10 mx-auto h-100">
+    <form name="form" (ngSubmit)="f.form.valid && onSubmitRegister()" #f="ngForm" novalidate class="row">
+      <mat-form-field class="col-12" appearance="outline">
+        <mat-label>Your name</mat-label>
+        <input matInput type="text" class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel"
+               required/>
+        <mat-error *ngIf="f.submitted && name.invalid">
+          <div *ngIf="name.errors?.required">Name is required</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-12" appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" class="form-control" name="username" [(ngModel)]="form.username"
+               #username="ngModel" required minlength="3"/>
+        <mat-error *ngIf="f.submitted && username.invalid">
+          <div *ngIf="username.errors?.required">Username is required</div>
+          <div *ngIf="username.errors?.minlength">Username should be at least 3 characters long</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-12" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" name="email" [(ngModel)]="form.email" #email="ngModel" required email/>
+        <mat-error *ngIf="f.submitted && email.invalid">
+          <div *ngIf="email.errors?.required">Email is required</div>
+          <div *ngIf="email.errors?.email">Wrong email pattern inserted</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-12" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" name="password" [(ngModel)]="form.password" #password="ngModel"
+               required minlength="8"
+               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"/>
+        <mat-error *ngIf="f.submitted && password.invalid">
+          <div *ngIf="password.errors?.required">Password is required</div>
+          <div *ngIf="password.errors?.minlength">Password should be at least 8 characters long</div>
+          <div *ngIf="password.errors?.pattern">Password should contain at least one upper case letter,
+            one number and a special character
+          </div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-12" appearance="outline">
+        <mat-label>Confirm password</mat-label>
+        <input matInput type="password" name="confirm" [(ngModel)]="form.confirmPassword"
+               #confirmPassword="ngModel" required pattern="{{ password.value }}"/>
+        <mat-error *ngIf="f.submitted && confirmPassword.invalid">
+          <div *ngIf="confirmPassword.errors?.required">Confirm password is required</div>
+          <div *ngIf="confirmPassword.errors?.minlength">Confirm password should be at least 8 characters
+            long
+          </div>
+          <div *ngIf="password.value!=confirmPassword.value">Password & Confirm Password does not match
+          </div>
+          <div *ngIf="confirmPassword.errors?.pattern">Confirm password does not match</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-12" appearance="outline">
+        <mat-label>Date of birth</mat-label>
+        <input matInput [matDatepicker]="dateOfBirth" [(ngModel)]="form.dateOfBirth" name="dateOfBirth"
+               disabled>
+        <mat-datepicker-toggle matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #dateOfBirth disabled="false"></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="form-group" appearance="outline">
+        <mat-label>Nickname</mat-label>
+        <input matInput type="text" name="nickname" [(ngModel)]="form.nickname" #nickname="ngModel"/>
+      </mat-form-field>
+      <div class="col-12">
+        <mat-error *ngIf="f.submitted && isSignUpFailed" class="mb-2 font-size-16">
+          <span>Sign up failed: <strong>{{errorMessage}}</strong></span>
+        </mat-error>
+        <button class="w-75" mat-stroked-button color="accent">
+          <i class="fas fa-user-plus bg-gradient"></i>
+          Sign up
+        </button>
+      </div>
+    </form>
+    <hr/>
+    <p>Already have an account?</p>
+    <button class="w-75" [routerLink]="'/login'" mat-stroked-button color="primary">
+      <i class="fas fa-sign-in-alt bg-gradient"></i>
+      Log in
+    </button>
+  </div>
+</div>

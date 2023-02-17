@@ -1,0 +1,8 @@
+<div class="align-middle text-center top-50 full-height position-fixed p-2 w-100" *ngIf="loading">
+  <div class="justify-content-center spinner-wrapper">
+    <div class="float-end push-left-mini position-relative">
+      <mat-spinner [diameter]="40" mode="indeterminate" [color]="color"></mat-spinner>
+    </div>
+    <div class="m-1">{{loadingText}}</div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="home-root p-3">
+  <div class="card-body full-height body-margin-bottom">
+    <p>{{'dynamic_description_intro' | transloco}}</p>
+    <p *ngIf="token.loggedIn.value">{{'dynamic_hello' | transloco : {
+      name: token.getName(),
+      email: token.getEmail()
+    } }}</p>
+    <p>{{token.getAuthorities()}}</p>
+    <button (click)="services.config.switchLanguage()"
+            class="btn btn-outline-dark">{{'switch_language' | transloco}}</button>
+  </div>
+</div>
